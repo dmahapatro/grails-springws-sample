@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:rs="http://example.com/reservationService"
+           targetNamespace="http://example.com/reservationService"
+           version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xs:annotation>
+        <xs:documentation>This is the base schema to represent how the entity Reservation should look like.</xs:documentation>
+    </xs:annotation>
+
+    <xs:element name="Reservation" type="rs:ReservationType"/>
+
+    <xs:complexType name="ReservationType">
+        <xs:sequence>
+            <xs:element name="ReservationId" type="xs:long" minOccurs="0"/>
+            <xs:element name="Departure" type="xs:string"/>
+            <xs:element name="Arrival" type="xs:string"/>
+            <xs:element name="DepartureTime" type="xs:dateTime"/>
+            <xs:element name="NoOfPassengers" type="xs:int" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

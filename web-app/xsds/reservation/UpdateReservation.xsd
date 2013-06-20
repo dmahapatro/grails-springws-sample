@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:res="http://example.com/reservationService"
+           xmlns:rs="http://example.com/reservationService"
+           targetNamespace="http://example.com/reservationService"
+           version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xs:import namespace="http://example.com/reservationService" schemaLocation="./Reservation.xsd"/>
+
+    <xs:annotation>
+        <xs:documentation>This is the contract for UPDATE reservation service.</xs:documentation>
+    </xs:annotation>
+
+    <xs:element name="UpdateReservationRequest" type="res:UpdateReservationRequestType"/>
+    <xs:complexType name="UpdateReservationRequestType">
+        <xs:sequence>
+            <xs:element ref="rs:Reservation" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="UpdateReservationResponse" type="res:UpdateReservationResponseType"/>
+    <xs:complexType name="UpdateReservationResponseType">
+        <xs:sequence>
+            <xs:element ref="rs:Reservation"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
