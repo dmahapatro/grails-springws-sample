@@ -20,8 +20,9 @@
 
     <xs:element name="UpdateReservationResponse" type="res:UpdateReservationResponseType"/>
     <xs:complexType name="UpdateReservationResponseType">
-        <xs:sequence>
-            <xs:element ref="rs:Reservation"/>
-        </xs:sequence>
+        <xs:choice>
+            <xs:element ref="rs:Reservation" minOccurs="0"/>
+            <xs:element name="Error" type="xs:string" minOccurs="0"/>
+        </xs:choice>
     </xs:complexType>
 </xs:schema>

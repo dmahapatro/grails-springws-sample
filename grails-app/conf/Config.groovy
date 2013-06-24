@@ -65,14 +65,14 @@ springws {
         Reservation {
             wsdlName = 'ReservationService'
             locationUri = "${grails.serverURL}/services"
-            xsds = ''' /xsds/reservation/GetReservation.xsd,
+            xsds = ''' /xsds/reservation/Reservation.xsd,
                        /xsds/reservation/UpdateReservation.xsd,
                        /xsds/reservation/CancelReservation.xsd,
-                       /xsds/reservation/Reservation.xsd '''
+                       /xsds/reservation/GetReservation.xsd,
+                       /xsds/reservation/ListReservations.xsd '''
             portTypeName = 'ReservationPort'
             serviceName = 'ReservationService'
             targetNamespace = 'http://example.com/reservation/reservationService/definition'
-            //export = true
             inline = true
         }
     }
