@@ -14,7 +14,7 @@ grails.project.dependency.resolution = {
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
-    legacyResolve true // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    //legacyResolve true // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
@@ -28,6 +28,7 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
+        compile 'org.apache.ws.xmlschema:xmlschema-core:2.0.2'
     }
 
     plugins {
@@ -37,6 +38,8 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.2.1"
 
         build ":tomcat:$grailsVersion"
-        //compile ":springws:1.0.0"
+        compile (":springws:1.0.0"){
+            excludes "xmlschema-core"
+        }
     }
 }

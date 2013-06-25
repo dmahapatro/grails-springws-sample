@@ -5,6 +5,7 @@ class GetReservationEndpoint {
     //Namespace has to match with the targetNamespace from the the schema
 	def static namespace = "http://example.com/reservationService"
     def static final ZULU_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    def static reservation_namespace = "http://example.com/reservation/entity"
 
     //Can also me used as method invoke(request, response)
     //Default template for endpoint has closure invoke
@@ -17,7 +18,7 @@ class GetReservationEndpoint {
         //schema (contract) use the same name of the response element from the schema
         //In this case "GetReservationResponse" is taken from GetReservation.xsd
         response.GetReservationResponse(xmlns: namespace){
-            Reservation{
+            Reservation(xmlns: reservation_namespace){
                 ReservationId(reservation.id)
                 Departure(reservation.departure)
                 Arrival(reservation.arrival)

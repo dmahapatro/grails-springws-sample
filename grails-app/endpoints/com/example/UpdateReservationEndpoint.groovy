@@ -4,6 +4,8 @@ class UpdateReservationEndpoint {
     //Namespace has to match with the targetNamespace from the the schema
     def static namespace = "http://example.com/reservationService"
     def static final ZULU_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    def static reservation_namespace = "http://example.com/reservation/entity"
+
 	
 	def invoke = { request, response ->
         //Parse the request
@@ -35,7 +37,7 @@ class UpdateReservationEndpoint {
 
     def setSuccessResponse(reservation, response){
         response.UpdateReservationResponse(xmlns: namespace){
-            Reservation{
+            Reservation(xmlns: reservation_namespace){
                 ReservationId(reservation.id)
                 Departure(reservation.departure)
                 Arrival(reservation.arrival)

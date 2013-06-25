@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="springws-sample" resourceRoot="" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ReservationPortSoap11" type="wsdl" bindingName="{http://example.com/reservation/reservationService/definition}ReservationPortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/grails-springws-sample/services/ReservationService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/grails-springws-sample/services/ReservationService.wsdl"><con:part><con:url>http://localhost:8080/grails-springws-sample/services/ReservationService.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://example.com/reservation/reservationService/definition" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch0="http://example.com/reservation/entity" xmlns:sch1="http://example.com/reservationService" xmlns:sch2="http://example.com/reservationService" xmlns:sch3="http://example.com/reservationService" xmlns:sch4="http://example.com/reservationService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://example.com/reservation/reservationService/definition">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://example.com/reservation/entity" xmlns:rs="http://example.com/reservation/entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:annotation>
+        <xs:documentation>This is the base schema to represent how the entity Reservation should look like.</xs:documentation>
+      </xs:annotation>
+      <xs:element name="Reservation" type="rs:ReservationType"/>
+      <xs:complexType name="ReservationType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ReservationId" type="xs:long"/>
+          <xs:element name="Departure" type="xs:string"/>
+          <xs:element name="Arrival" type="xs:string"/>
+          <xs:element name="DepartureTime" type="xs:dateTime"/>
+          <xs:element name="NoOfPassengers" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://example.com/reservationService" xmlns:res="http://example.com/reservationService" xmlns:rs="http://example.com/reservation/entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:annotation>
+        <xs:documentation>This is the contract for UPDATE reservation service.</xs:documentation>
+      </xs:annotation>
+      <xs:import namespace="http://example.com/reservation/entity"/>
+      <xs:element name="UpdateReservationRequest" type="res:UpdateReservationRequestType"/>
+      <xs:complexType name="UpdateReservationRequestType">
+        <xs:sequence>
+          <xs:element ref="rs:Reservation"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UpdateReservationResponse" type="res:UpdateReservationResponseType"/>
+      <xs:complexType name="UpdateReservationResponseType">
+        <xs:choice>
+          <xs:element minOccurs="0" ref="rs:Reservation"/>
+          <xs:element minOccurs="0" name="Error" type="xs:string"/>
+        </xs:choice>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://example.com/reservationService" xmlns:res="http://example.com/reservationService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:annotation>
+        <xs:documentation>This is the contract for CANCEL reservation service.</xs:documentation>
+      </xs:annotation>
+      <xs:element name="CancelReservationRequest" type="res:CancelReservationRequestType"/>
+      <xs:complexType name="CancelReservationRequestType">
+        <xs:sequence>
+          <xs:element name="ReservationId" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CancelReservationResponse" type="res:CancelReservationResponseType"/>
+      <xs:complexType name="CancelReservationResponseType">
+        <xs:choice>
+          <xs:element name="Success" type="xs:string"/>
+          <xs:element name="Error" type="xs:string"/>
+        </xs:choice>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://example.com/reservationService" xmlns:res="http://example.com/reservationService" xmlns:rs="http://example.com/reservation/entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:annotation>
+        <xs:documentation>This is the contract for GET reservation.</xs:documentation>
+      </xs:annotation>
+      <xs:import namespace="http://example.com/reservation/entity"/>
+      <xs:element name="GetReservationRequest" type="res:GetReservationRequestType"/>
+      <xs:complexType name="GetReservationRequestType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ReservationId" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetReservationResponse" type="res:GetReservationResponseType"/>
+      <xs:complexType name="GetReservationResponseType">
+        <xs:sequence>
+          <xs:element ref="rs:Reservation"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://example.com/reservationService" xmlns:res="http://example.com/reservationService" xmlns:rs="http://example.com/reservation/entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:annotation>
+        <xs:documentation>This is the contract for LIST reservations.</xs:documentation>
+      </xs:annotation>
+      <xs:import namespace="http://example.com/reservation/entity"/>
+      <xs:element name="ListReservationsRequest"/>
+      <xs:element name="ListReservationsResponse" type="res:ListReservationsResponseType"/>
+      <xs:complexType name="ListReservationsResponseType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="rs:Reservation"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CancelReservationRequest">
+    <wsdl:part element="sch3:CancelReservationRequest" name="CancelReservationRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CancelReservationResponse">
+    <wsdl:part element="sch3:CancelReservationResponse" name="CancelReservationResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListReservationsRequest">
+    <wsdl:part element="sch3:ListReservationsRequest" name="ListReservationsRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateReservationResponse">
+    <wsdl:part element="sch3:UpdateReservationResponse" name="UpdateReservationResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetReservationResponse">
+    <wsdl:part element="sch3:GetReservationResponse" name="GetReservationResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListReservationsResponse">
+    <wsdl:part element="sch3:ListReservationsResponse" name="ListReservationsResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetReservationRequest">
+    <wsdl:part element="sch3:GetReservationRequest" name="GetReservationRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateReservationRequest">
+    <wsdl:part element="sch3:UpdateReservationRequest" name="UpdateReservationRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ReservationPort">
+    <wsdl:operation name="CancelReservation">
+      <wsdl:input message="tns:CancelReservationRequest" name="CancelReservationRequest"></wsdl:input>
+      <wsdl:output message="tns:CancelReservationResponse" name="CancelReservationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListReservations">
+      <wsdl:input message="tns:ListReservationsRequest" name="ListReservationsRequest"></wsdl:input>
+      <wsdl:output message="tns:ListReservationsResponse" name="ListReservationsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReservation">
+      <wsdl:input message="tns:UpdateReservationRequest" name="UpdateReservationRequest"></wsdl:input>
+      <wsdl:output message="tns:UpdateReservationResponse" name="UpdateReservationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReservation">
+      <wsdl:input message="tns:GetReservationRequest" name="GetReservationRequest"></wsdl:input>
+      <wsdl:output message="tns:GetReservationResponse" name="GetReservationResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ReservationPortSoap11" type="tns:ReservationPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CancelReservation">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CancelReservationRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CancelReservationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListReservations">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ListReservationsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ListReservationsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReservation">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateReservationRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateReservationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReservation">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetReservationRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetReservationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ReservationService">
+    <wsdl:port binding="tns:ReservationPortSoap11" name="ReservationPortSoap11">
+      <soap:address location="http://localhost:8080/grails-springws-sample/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/grails-springws-sample/services</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="CancelReservation" bindingOperationName="CancelReservation" type="Request-Response" outputName="CancelReservationResponse" inputName="CancelReservationRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Happy Path"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/grails-springws-sample/services</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://example.com/reservationService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <res:CancelReservationRequest>
+         <res:ReservationId>4</res:ReservationId>
+      </res:CancelReservationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/reservation/reservationService/definition/ReservationPort/CancelReservationRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Interceptor in Action"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/grails-springws-sample/services</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://example.com/reservationService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <res:CancelReservationRequest>
+         <res:ReservationId>BadData</res:ReservationId>
+      </res:CancelReservationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/reservation/reservationService/definition/ReservationPort/CancelReservationRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="GetReservation" bindingOperationName="GetReservation" type="Request-Response" outputName="GetReservationResponse" inputName="GetReservationRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Happy Path"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/grails-springws-sample/services</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://example.com/reservationService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <res:GetReservationRequest>
+         <!--Optional:-->
+         <res:ReservationId>3</res:ReservationId>
+      </res:GetReservationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/reservation/reservationService/definition/ReservationPort/GetReservationRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Interceptor in Action"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/grails-springws-sample/services</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://example.com/reservationService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <res:GetReservationRequest>
+         <!--Optional:-->
+         <res:ReservationId>badData</res:ReservationId>
+      </res:GetReservationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/reservation/reservationService/definition/ReservationPort/GetReservationRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ListReservations" bindingOperationName="ListReservations" type="Request-Response" outputName="ListReservationsResponse" inputName="ListReservationsRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Happy Path"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/grails-springws-sample/services</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://example.com/reservationService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <res:ListReservationsRequest/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/reservation/reservationService/definition/ReservationPort/ListReservationsRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="UpdateReservation" bindingOperationName="UpdateReservation" type="Request-Response" outputName="UpdateReservationResponse" inputName="UpdateReservationRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Happy Path"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/grails-springws-sample/services</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://example.com/reservationService" xmlns:ent="http://example.com/reservation/entity">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <res:UpdateReservationRequest>
+         <ent:Reservation>
+            <!--Optional:-->
+            <ent:ReservationId>1</ent:ReservationId>
+            <ent:Departure>CMH</ent:Departure>
+            <ent:Arrival>PHL</ent:Arrival>
+            <ent:DepartureTime>2013-08-26T23:10:32.813Z</ent:DepartureTime>
+            <ent:NoOfPassengers>3</ent:NoOfPassengers>
+         </ent:Reservation>
+      </res:UpdateReservationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/reservation/reservationService/definition/ReservationPort/UpdateReservationRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Interceptor in Action"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/grails-springws-sample/services</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://example.com/reservationService" xmlns:ent="http://example.com/reservation/entity">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <res:UpdateReservationRequest>
+         <ent:Reservation>
+            <!--Optional:-->
+            <ent:ReservationId>BadData</ent:ReservationId>
+            <ent:Departure>CMH</ent:Departure>
+            <ent:Arrival>PHL</ent:Arrival>
+            <ent:DepartureTime>BadDate</ent:DepartureTime>
+            <ent:NoOfPassengers>3</ent:NoOfPassengers>
+         </ent:Reservation>
+      </res:UpdateReservationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/reservation/reservationService/definition/ReservationPort/UpdateReservationRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
