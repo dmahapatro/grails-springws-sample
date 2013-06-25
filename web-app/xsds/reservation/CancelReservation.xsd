@@ -17,8 +17,9 @@
 
     <xs:element name="CancelReservationResponse" type="res:CancelReservationResponseType"/>
     <xs:complexType name="CancelReservationResponseType">
-        <xs:sequence>
+        <xs:choice>
             <xs:element name="Success" type="xs:string"/>
-        </xs:sequence>
+            <xs:element name="Error" type="xs:string"/>
+        </xs:choice>
     </xs:complexType>
 </xs:schema>

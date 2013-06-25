@@ -5,7 +5,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 
-grails.plugin.location.springws="C:\\Projects\\Grails\\Plugins\\grails-springws"
+//grails.plugin.location.springws="C:\\Projects\\Grails\\Plugins\\grails-springws"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -14,10 +14,10 @@ grails.project.dependency.resolution = {
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
-    //legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    legacyResolve true // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
     repositories {
-        //inherits true // Whether to inherit repository definitions from plugins
+        inherits true // Whether to inherit repository definitions from plugins
 
         grailsPlugins()
         grailsHome()
@@ -37,6 +37,6 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.2.1"
 
         build ":tomcat:$grailsVersion"
-        //compile ":springws:0.5.0"
+        //compile ":springws:1.0.0"
     }
 }
